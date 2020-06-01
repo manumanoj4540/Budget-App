@@ -61,36 +61,31 @@ var budgetController = (function() {
             //[1 2 4 6 8], next ID = 9
             // ID = last ID + 1
             
-            // Create new ID
+            // Creates new ID
             if (data.allItems[type].length > 0) {
                 ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
             } else {
                 ID = 0;
             }
             
-            // Create new item based on 'inc' or 'exp' type
+            // Creates new item based on 'inc' or 'exp' type
             if (type === 'exp') {
                 newItem = new Expense(ID, des, val);
             } else if (type === 'inc') {
                 newItem = new Income(ID, des, val);
             }
             
-            // Push it into our data structure
+            // Pushes it into data structure
             data.allItems[type].push(newItem);
             
-            // Return the new element
+            // Returns the new element
             return newItem;
         },
         
         
         deleteItem: function(type, id) {
             var ids, index;
-            
-            // id = 6
-            //data.allItems[type][id];
-            // ids = [1 2 4  8]
-            //index = 3
-            
+
             ids = data.allItems[type].map(function(current) {
                 return current.id;
             });
@@ -106,34 +101,24 @@ var budgetController = (function() {
         
         calculateBudget: function() {
             
-            // calculate total income and expenses
+            // calculates total income and expenses
             calculateTotal('exp');
             calculateTotal('inc');
             
-            // Calculate the budget: income - expenses
+            // Calculates the budget: income - expenses
             data.budget = data.totals.inc - data.totals.exp;
             
-            // calculate the percentage of income that we spent
+            // calculates the percentage of income that we spent
             if (data.totals.inc > 0) {
                 data.percentage = Math.round((data.totals.exp / data.totals.inc) * 100);
             } else {
                 data.percentage = -1;
             }            
             
-            // Expense = 100 and income 300, spent 33.333% = 100/300 = 0.3333 * 100
         },
         
         calculatePercentages: function() {
             
-            /*
-            a=20
-            b=10
-            c=40
-            income = 100
-            a=20/100=20%
-            b=10/100=10%
-            c=40/100=40%
-            */
             
             data.allItems.exp.forEach(function(cur) {
                cur.calcPercentage(data.totals.inc);
@@ -190,7 +175,7 @@ var UIController = (function() {
     
     var formatNumber = function(num, type) {
         var numSplit, int, dec, type;
-        /*
+        /* logic
             + or - before number
             exactly 2 decimal points
             comma separating the thousands
