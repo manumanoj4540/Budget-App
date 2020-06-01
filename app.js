@@ -218,7 +218,7 @@ var UIController = (function() {
     
     var nodeListForEach = function(list, callback) {
         for (var i = 0; i < list.length; i++) {
-            callback(list[i], i);
+            callback(list[i]);
         }
     };
     
