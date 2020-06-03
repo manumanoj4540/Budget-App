@@ -93,7 +93,7 @@ var budgetController = (function() {
             index = ids.indexOf(id);
 
             if (index !== -1) {
-                data.allItems[type].splice(index, 1);
+                data.allItems[type].splice(index, 1);//Index is the starting postion followed by number of items to be deleted
             }
             
         },
